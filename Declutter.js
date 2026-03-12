@@ -165,34 +165,40 @@ function renderTasks() {
         li.ontouchend = () => { clearTimeout(pressTimer); };
 
         li.innerHTML = `
-            <div style="display:flex; align-items:center; gap:15px; flex-grow:1;">
-                <input type="checkbox" 
-                    style="width:20px; height:20px; cursor:pointer; background:white;" 
-                    ${task.completed ? 'checked' : ''} 
-                    onclick="toggleComplete(${task.id})" 
-                    ${isEditing ? 'disabled' : ''}>
-                
-                ${isEditing ? 
-                    `<input type="text" id="edit-input-${task.id}" 
-                        style="background:rgba(255,255,255,0.1); border:none; border-bottom:1px solid #fff; color:inherit; font-family:'Space Mono'; font-size:1rem; padding:5px; width:90%; outline:none;"
-                        value="${task.text}" 
-                        onkeydown="if(event.key==='Enter') handleEditSave(${task.id}, this.value)"
-                        onblur="handleEditSave(${task.id}, this.value)">` 
-                    : 
-                    `<span class="task-text ${task.completed ? 'completed-text' : ''}" 
-                        style="cursor:pointer; font-size:1.1rem;"
-                        ondblclick="editTask(${task.id})">
-                        ${task.text}
-                    </span>`
-                }
-            </div>
-            <div style="display:flex; gap:10px;">
-                <button class="task-action-btn" onclick="editTask(${task.id})" 
-                    ${isEditing ? 'disabled style="opacity:0.5"' : ''}>EDIT</button>
-                <button class="task-action-btn" onclick="deleteTask(${task.id})" 
-                    ${isEditing ? 'disabled style="opacity:0.5"' : ''}>X</button>
-            </div>
-        `;
+        li.innerHTML = `
+    <div style="display:flex; align-items:center; gap:15px; flex-grow:1;">
+        <input type="checkbox" 
+            style="width:20px; height:20px; cursor:pointer; background:white;" 
+            ${task.completed ? 'checked' : ''} 
+            onclick="toggleComplete(${task.id})" 
+            ${isEditing ? 'disabled' : ''}>
+        
+        ${isEditing ? 
+            `<input type="text" id="edit-input-${task.id}" 
+                style="background:rgba(255,255,255,0.1); border:none; border-bottom:1px solid #fff; color:inherit; font-family:'Space Mono'; font-size:1rem; padding:5px; width:90%; outline:none;"
+                value="${task.text}" 
+                onkeydown="if(event.key==='Enter') handleEditSave(${task.id}, this.value)"
+                onblur="handleEditSave(${task.id}, this.value)">` 
+            : 
+            `<span class="task-text ${task.completed ? 'completed-text' : ''}" 
+                style="cursor:pointer; font-size:1.1rem;"
+                ondblclick="editTask(${task.id})">
+                ${task.text}
+            </span>`
+        }
+    </div>
+    <div style="display:flex; gap:10px;">
+        <button class="task-action-btn" onclick="editTask(${task.id})" 
+            ${isEditing ? 'disabled style="opacity:0.5"' : ''}>
+            <i class="fa-solid fa-pen-to-square"></i>
+        </button>
+        <button class="task-action-btn" onclick="deleteTask(${task.id})" 
+            ${isEditing ? 'disabled style="opacity:0.5"' : ''}>
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </div>
+`;
+
         taskList.appendChild(li);
     });
 
